@@ -1,6 +1,3 @@
-//=============================================================================
-//// Shader uses position and texture
-//=============================================================================
 SamplerState samPoint
 {
     Filter = MIN_MAG_MIP_POINT;
@@ -10,24 +7,18 @@ SamplerState samPoint
 
 Texture2D gTexture;
 
-/// Create Depth Stencil State (ENABLE DEPTH WRITING)
 DepthStencilState EnableDepthWriting
 {
-    //Enable Depth Rendering
-    DepthEnable = TRUE;
-    //Disable Depth Writing
-    DepthWriteMask = ALL;
+        DepthEnable = TRUE;
+        DepthWriteMask = ALL;
 };
 
-/// Create Rasterizer State (Backface culling) 
 RasterizerState BackCulling
 {
     CullMode = BACK;
 };
 
 
-//IN/OUT STRUCTS
-//--------------
 struct VS_INPUT
 {
     float3 Position : POSITION;
@@ -42,42 +33,30 @@ struct PS_INPUT
 };
 
 
-//VERTEX SHADER
-//-------------
 PS_INPUT VS(VS_INPUT input)
 {
 	PS_INPUT output = (PS_INPUT)0;
-	// Set the Position
-    output.Position = float4(input.Position,1.0f);
-	// Set the TexCoord
-    output.TexCoord = input.TexCoord;
+	    output.Position = float4(input.Position,1.0f);
+	    output.TexCoord = input.TexCoord;
 	
 	return output;
 }
 
 
-//PIXEL SHADER
-//------------
 float4 PS(PS_INPUT input): SV_Target
 {
-    // Step 1: sample the texture
-    float4 result = gTexture.Sample(samPoint, input.TexCoord);
-	// Step 2: calculate the mean value
-	float meanVal = (result.x + result.y + result.z) / 3.0f;
+        float4 result = gTexture.Sample(samPoint, input.TexCoord);
+		float meanVal = (result.x + result.y + result.z) / 3.0f;
 
-	// Step 3: return the color
-    return float4(meanVal,meanVal,meanVal ,result.w);
+	    return float4(meanVal,meanVal,meanVal ,result.w);
 }
 
 
-//TECHNIQUE
-//---------
 technique11 Grayscale
 {
     pass P0
     {          
-        // Set states...
-		SetVertexShader( CompileShader( vs_4_0, VS() ) );
+        		SetVertexShader( CompileShader( vs_4_0, VS() ) );
         SetGeometryShader( NULL );
         SetPixelShader( CompileShader( ps_4_0, PS() ) );
 

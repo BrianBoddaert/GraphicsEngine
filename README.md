@@ -8,21 +8,21 @@ Custom engine implementation on top of Overlord engine. This project includes cu
 ### Shaders
 I wrote my shaders in HLSL using FXComposer. My final shader made use of the following shaders / techniques:
 
-Diffuse
-Specular
-Specular Level
-Shininess
-Blinn
-Phong
-Ambient
-Environment Mapping (CubeMap)
-Reflection with Fresnel Falloff
-Refraction
-Normal
-Opacity
-Techniques
-With Alpha Blending
-Without Alpha Blending
+- Diffuse
+- Specular
+	- Specular Level
+	- Shininess
+	- Blinn
+	- Phong
+- Ambient
+- Environment Mapping (CubeMap)
+	- Reflection with Fresnel Falloff
+	- Refraction
+- Normal
+- Opacity
+- Techniques
+	- With Alpha Blending
+	- Without Alpha Blending
 
 ### Shadow mapping
 
